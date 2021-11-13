@@ -30,7 +30,7 @@ class TestingSystems(
     private fun runTest(inFile: File, outFile: File): Boolean {
         val lineSeparator = inFile.readLines()
         val actual = task.run(lineSeparator)
-        val except = outFile.readText()
+        val except = outFile.readText().trim()
         return except == actual
     }
 }
