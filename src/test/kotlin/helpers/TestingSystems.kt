@@ -21,8 +21,9 @@ class TestingSystems(
                 break
             }
 
+            val start = System.nanoTime()
             val result = runTest(inFile, outFile)
-            println("Test #$currFileNumber - $result")
+            println("${(System.nanoTime() - start) / 1_000} microseconds Test #$currFileNumber - $result")
             currFileNumber++
         }
     }
