@@ -23,6 +23,7 @@ class TestingSystems(
 
             val start = System.nanoTime()
             val result = runTest(inFile, outFile)
+            assert(result)
             println("${(System.nanoTime() - start) / 1_000} microseconds Test #$currFileNumber - $result")
             currFileNumber++
         }
@@ -32,6 +33,10 @@ class TestingSystems(
         val lineSeparator = inFile.readLines()
         val actual = task.run(lineSeparator)
         val except = outFile.readText().trim()
+        if (except.contains('.') && except.toDoubleOrNull() is Double && actual.toDoubleOrNull() is Double) {
+            return Math.abs(except.toDouble() - actual.toDouble()) < 0.0001
+        }
+
         return except == actual
     }
 }
