@@ -1,9 +1,7 @@
-package solutions
+package solutions.lesson3
 
 import helpers.TestingSystems
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class Lesson3IterativeFibonacciTest {
 

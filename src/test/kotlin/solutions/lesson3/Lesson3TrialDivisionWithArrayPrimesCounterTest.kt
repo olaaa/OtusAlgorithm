@@ -1,4 +1,4 @@
-package solutions
+package solutions.lesson3
 
 import helpers.TestingSystems
 import org.junit.jupiter.api.Test

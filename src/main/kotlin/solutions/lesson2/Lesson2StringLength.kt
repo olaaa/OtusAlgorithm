@@ -1,4 +1,4 @@
-package solutions
+package solutions.lesson2
 
 import api.Task
 
