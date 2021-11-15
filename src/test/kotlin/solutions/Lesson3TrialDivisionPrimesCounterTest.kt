@@ -7,7 +7,7 @@ internal class Lesson3TrialDivisionPrimesCounterTest {
 
     @Test
     fun run() {
-        val testingSystems = TestingSystems("3/5.Primes", Lesson3TrialDivisionOptimizedPrimesCounter())
+        val testingSystems = TestingSystems("3/5.Primes", Lesson3TrialDivisionPrimesCounter())
         testingSystems.runTests()
     }
 }
