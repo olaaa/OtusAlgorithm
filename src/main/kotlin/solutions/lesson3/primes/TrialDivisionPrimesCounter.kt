@@ -2,6 +2,7 @@ package solutions.lesson3.primes
 
 import api.Task
 
+// O(N^2)
 class TrialDivisionPrimesCounter : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {

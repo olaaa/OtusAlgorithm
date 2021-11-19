@@ -2,6 +2,8 @@ package solutions.lesson3.power
 
 import api.Task
 
+//O(2 * log по основанию 2 от N).
+// 2, потому что в худшем случае придется домножать на каждой итерации. Например, когда power = 127
 class ExponentiationBySquaring : Task {
     override fun run(data: List<String>): String {
         if (data.size != 2) {

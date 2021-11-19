@@ -4,6 +4,7 @@ import api.Task
 import util.ExponentiationFiboMatrixBySquaring
 import java.math.BigDecimal
 
+//O(2 * log по основанию 2 от N)
 class MatrixMultiplierFibonacci : Task {
     private val matrixTransformations =
         arrayOf(arrayOf(BigDecimal.ONE, BigDecimal.ONE), arrayOf(BigDecimal.ONE, BigDecimal.ZERO))
