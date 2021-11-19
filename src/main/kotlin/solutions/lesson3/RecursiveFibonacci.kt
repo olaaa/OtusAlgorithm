@@ -3,7 +3,7 @@ package solutions.lesson3
 import api.Task
 
 //  сложность алгоритма экспоненциальная 2^N, сложность по памяти линейная
-class Lesson3RecursiveFibonacci : Task {
+class RecursiveFibonacci : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {
             throw IllegalArgumentException()

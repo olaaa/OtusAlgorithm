@@ -4,7 +4,7 @@ import api.Task
 import java.math.BigInteger
 
 //  сложность алгоритма линейная
-class Lesson3IterativeFibonacci : Task {
+class IterativeFibonacci : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {
             throw IllegalArgumentException()

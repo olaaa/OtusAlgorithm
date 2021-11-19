@@ -3,7 +3,7 @@ package solutions.lesson3
 import api.Task
 
 // линейная сложность
-class Lesson3IterativeExponentiation : Task {
+class IterativeExponentiation : Task {
     override fun run(data: List<String>): String {
         if (data.size != 2) {
             throw IllegalArgumentException()

@@ -4,7 +4,7 @@ import api.Task
 
 // сложность алгоритма
 // N * √N/ln√N
-class Lesson3TrialDivisionWithArrayPrimesCounter : Task {
+class TrialDivisionWithArrayPrimesCounter : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {
             throw IllegalArgumentException()

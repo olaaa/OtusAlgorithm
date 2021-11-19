@@ -3,11 +3,11 @@ package solutions.lesson3
 import helpers.TestingSystems
 import org.junit.jupiter.api.Test
 
-internal class Lesson3IterativeFibonacciTest {
+internal class IterativeFibonacciTest {
 
     @Test
     fun run() {
-        val testingSystems = TestingSystems("3/4.Fibo", Lesson3IterativeFibonacci())
+        val testingSystems = TestingSystems("3/4.Fibo", IterativeFibonacci())
         testingSystems.runTests()
     }
 }

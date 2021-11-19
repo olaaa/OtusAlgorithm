@@ -2,7 +2,7 @@ package solutions.lesson3
 
 import api.Task
 
-class Lesson3TrialDivisionPrimesCounter : Task {
+class TrialDivisionPrimesCounter : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {
             throw IllegalArgumentException()
