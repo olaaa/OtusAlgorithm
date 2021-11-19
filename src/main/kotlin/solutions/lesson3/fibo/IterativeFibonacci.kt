@@ -1,4 +1,4 @@
-package solutions.lesson3
+package solutions.lesson3.fibo
 
 import api.Task
 import java.math.BigInteger

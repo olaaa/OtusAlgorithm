@@ -1,4 +1,4 @@
-package solutions.lesson3
+package solutions.lesson3.power
 
 import api.Task
 
