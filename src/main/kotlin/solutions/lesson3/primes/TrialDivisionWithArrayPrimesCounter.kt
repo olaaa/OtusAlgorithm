@@ -4,6 +4,8 @@ import api.Task
 
 // сложность алгоритма
 // N * √N/ln√N
+// Так как по формуле Чебышева может быть оценено, сколько простых чисел от 1до N: N/lnN
+
 class TrialDivisionWithArrayPrimesCounter : Task {
     override fun run(data: List<String>): String {
         if (data.size != 1) {
