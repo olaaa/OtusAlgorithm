@@ -10,7 +10,7 @@ import kotlin.io.path.Path
 
 fun main() {
     val map = mapOf(0 to 10L, 1 to 100L, 2 to 1000L, 3 to 10_000L)
-    val testFileNumber = 3
+    val testFileNumber = 0
     val arraySize: Long = map[testFileNumber]!!
 
     createFiles(arraySize, testFileNumber)
