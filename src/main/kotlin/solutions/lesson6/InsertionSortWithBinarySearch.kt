@@ -10,24 +10,19 @@ class InsertionSortWithBinarySearch : Task {
     override fun run(data: List<String>): String {
         val array = data.map { it.toInt() }.toTypedArray<Int>()
         val n = array.size
-        var position = 0
+        var position: Int
         for (barrier in 1..n - 1) {
 //           param toIndex -- exclusive
             val newElement = array[barrier]
             val pos =
                 Arrays.binarySearch(array, 0, barrier, array[barrier]) // работает по отсортированному массиву
 
-            if (pos < 0) {
-                position = Math.abs(pos) - 1
-            } else {
-                // в отсортированной части есть такой же элемент
-                position = pos + 1
-            }
+//          предполагаемое место вставки  (-(insertion point) - 1), поэтому число по модулю надо увеличить
+//           либо эквивалентный желемент уже существует в отсортированной части, тогда newElement ставим после найденного
+            position = Math.abs(pos + 1)
 
-            if (position == barrier) {
-                continue
-            }
 
+            // если position == barrier, то arraycopy будет копировать ноль элементов
             System.arraycopy(array, position, array, position + 1, barrier - position)
             array[position] = newElement
         }
