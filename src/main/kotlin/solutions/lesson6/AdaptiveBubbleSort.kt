@@ -1,6 +1,7 @@
 package solutions.lesson6
 
 import api.Task
+import util.swap
 
 class AdaptiveBubbleSort : Task {
     override fun run(data: List<String>): String {
@@ -25,9 +26,4 @@ class AdaptiveBubbleSort : Task {
         }
     }
 
-    private fun swap(array: Array<Int>, i: Int, j: Int) {
-        val tmp = array[i]
-        array[i] = array[j]
-        array[j] = tmp
-    }
 }
