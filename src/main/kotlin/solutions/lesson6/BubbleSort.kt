@@ -10,10 +10,10 @@ class BubbleSort : Task {
     }
 
     private fun sort(array: Array<Int>) {
-        for (i in 0 until array.size - 1) {
-            for (j in 0 until array.size - i - 1) {
-                if (array[j] > array[j + 1]) { // из-за j + 1 в условии цикла -1, чтобы бы не выйти за границу массива
-                    swap(array, j, j + 1)
+        for (barrier in 0 until array.size - 1) {
+            for (index in 0 until array.size - barrier - 1) {
+                if (array[index] > array[index + 1]) { // из-за index + 1 в условии цикла -1, чтобы бы не выйти за границу массива
+                    swap(array, index, index + 1)
                 }
             }
         }
