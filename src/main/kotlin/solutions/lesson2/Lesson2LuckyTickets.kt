@@ -1,7 +1,6 @@
 package solutions.lesson2
 
 import api.Task
-import kotlin.math.pow
 
 class Lesson2LuckyTickets : Task {
     override fun run(data: List<String>): String {
@@ -33,7 +32,7 @@ class Lesson2LuckyTickets : Task {
         for (i in 0 until (num - 1)) { // если N = 1, то в тело цикла не должны попасть
             arr = getNextArr(arr) // строим следующие массивы
         }
-        arr.forEach { result += it.toDouble().pow(2.0).toLong() } // сводим квадраты значений в получившемся массиве
+        arr.forEach { result += it.toBigDecimal().pow(2).toLong() } // сводим квадраты значений в получившемся массиве
         return result
     }
 }
