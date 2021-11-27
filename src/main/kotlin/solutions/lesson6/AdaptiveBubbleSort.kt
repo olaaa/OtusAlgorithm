@@ -1,13 +1,14 @@
 package solutions.lesson6
 
 import api.Task
+import util.convertInputToArray
 import util.swap
 
 class AdaptiveBubbleSort : Task {
     override fun run(data: List<String>): String {
-        val array = data.map { it.toInt() }.toTypedArray<Int>()
+        val array = convertInputToArray(data)
         sort(array)
-        return array.contentDeepToString()
+        return array.joinToString(separator = " ")
     }
 
     fun sort(array: Array<Int>) {

@@ -1,6 +1,7 @@
 package solutions.lesson6
 
 import api.Task
+import util.convertInputToArray
 import java.util.*
 
 // берется очередной сырой элемент и помещается в отсоритрованную часть. Эта часть нельзя возвращать клиенту,
@@ -8,7 +9,7 @@ import java.util.*
 // Элементы через границу не перелетают
 class InsertionSortWithBinarySearch : Task {
     override fun run(data: List<String>): String {
-        val array = data.map { it.toInt() }.toTypedArray<Int>()
+        val array = convertInputToArray(data)
         val n = array.size
         var position: Int
         for (barrier in 1..n - 1) {
@@ -26,6 +27,6 @@ class InsertionSortWithBinarySearch : Task {
             System.arraycopy(array, position, array, position + 1, barrier - position)
             array[position] = newElement
         }
-        return array.contentDeepToString()
+        return array.joinToString(separator = " ")
     }
 }

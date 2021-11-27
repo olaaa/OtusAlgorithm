@@ -1,6 +1,7 @@
 package solutions.lesson6
 
 import api.Task
+import util.convertInputToArray
 import util.swap
 
 // берется очередной сырой элемент и помещается в отсоритрованную часть. Эта часть нельзя возвращать клиенту,
@@ -8,7 +9,7 @@ import util.swap
 // Элементы через границу не перелетают
 class InsertionSortWithSwap : Task {
     override fun run(data: List<String>): String {
-        val array = data.map { it.toInt() }.toTypedArray<Int>()
+        val array: Array<Int> = convertInputToArray(data)
         val n = array.size
         for (barrier in 1..n - 1) {
             var location = barrier
@@ -17,6 +18,6 @@ class InsertionSortWithSwap : Task {
                 location = location - 1  //  бежим к началу массива
             }
         }
-        return array.contentDeepToString()
+        return array.joinToString(separator = " ")
     }
 }
