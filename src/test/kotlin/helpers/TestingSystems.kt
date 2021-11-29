@@ -1,8 +1,10 @@
 package helpers
 
 import api.Task
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.time.Duration
 
 class TestingSystems(
     private val pathToLesson: String,
@@ -38,5 +40,11 @@ class TestingSystems(
         }
 
         return except == actual
+    }
+}
+
+fun runWithTimeout(testingSystems: TestingSystems) {
+    Assertions.assertTimeoutPreemptively(Duration.ofMillis(3 * 60 * 1000)) {
+        testingSystems.runTests()
     }
 }

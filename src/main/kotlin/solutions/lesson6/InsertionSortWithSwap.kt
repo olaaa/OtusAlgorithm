@@ -9,7 +9,7 @@ import util.swap
 // Элементы через границу не перелетают
 class InsertionSortWithSwap : Task {
     override fun run(data: List<String>): String {
-        val array: Array<Int> = convertInputToArray(data)
+        val array = convertInputToArray(data)
         val n = array.size
         for (barrier in 1..n - 1) {
             var location = barrier

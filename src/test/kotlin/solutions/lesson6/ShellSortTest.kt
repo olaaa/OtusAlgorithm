@@ -4,35 +4,35 @@ import helpers.TestingSystems
 import helpers.runWithTimeout
 import org.junit.jupiter.api.Test
 
-internal class InsertionSortWithShiftTest {
+internal class ShellSortTest {
 
-    private val insertionSortWithShift = InsertionSortWithShift()
+    private val shellSort = ShellSort()
 
 
     @Test
     fun runRandom() {
-        val testingSystems = TestingSystems("6/0.random", insertionSortWithShift)
+        val testingSystems = TestingSystems("6/0.random", shellSort)
         runWithTimeout(testingSystems)
     }
 
 
     @Test
     fun runDigits() {
-        val testingSystems = TestingSystems("6/1.digits", insertionSortWithShift)
+        val testingSystems = TestingSystems("6/1.digits", shellSort)
         runWithTimeout(testingSystems)
     }
 
 
     @Test
     fun runSorted() {
-        val testingSystems = TestingSystems("6/2.sorted", insertionSortWithShift)
+        val testingSystems = TestingSystems("6/2.sorted", shellSort)
         runWithTimeout(testingSystems)
     }
 
 
     @Test
     fun runRevers() {
-        val testingSystems = TestingSystems("6/3.revers", insertionSortWithShift)
+        val testingSystems = TestingSystems("6/3.revers", shellSort)
         runWithTimeout(testingSystems)
     }
 }

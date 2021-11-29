@@ -11,7 +11,7 @@ class AdaptiveBubbleSort : Task {
         return array.joinToString(separator = " ")
     }
 
-    fun sort(array: Array<Int>) {
+    fun sort(array: IntArray) {
         var swapped = false
         for (barrier in 0 until array.size - 1) {
             for (index in 0 until array.size - barrier - 1) {

@@ -1,39 +1,38 @@
 package solutions.lesson6
 
 import helpers.TestingSystems
+import helpers.runWithTimeout
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Timeout
-import java.util.concurrent.TimeUnit
 
 internal class InsertionSortWithBinarySearchTest {
 
     private val insertionSortWithBinarySearch = InsertionSortWithBinarySearch()
 
-    @Timeout(value = 3, unit = TimeUnit.MINUTES)
+
     @Test
     fun runRandom() {
         val testingSystems = TestingSystems("6/0.random", insertionSortWithBinarySearch)
-        testingSystems.runTests()
+        runWithTimeout(testingSystems)
     }
 
-    @Timeout(value = 3, unit = TimeUnit.MINUTES)
+
     @Test
-    fun runDigits() {
+    fun runDig3its() {
         val testingSystems = TestingSystems("6/1.digits", insertionSortWithBinarySearch)
-        testingSystems.runTests()
+        runWithTimeout(testingSystems)
     }
 
-    @Timeout(value = 3, unit = TimeUnit.MINUTES)
+
     @Test
     fun runSorted() {
         val testingSystems = TestingSystems("6/2.sorted", insertionSortWithBinarySearch)
-        testingSystems.runTests()
+        runWithTimeout(testingSystems)
     }
 
-    @Timeout(value = 3, unit = TimeUnit.MINUTES)
+
     @Test
     fun runRevers() {
         val testingSystems = TestingSystems("6/3.revers", insertionSortWithBinarySearch)
-        testingSystems.runTests()
+        runWithTimeout(testingSystems)
     }
 }
