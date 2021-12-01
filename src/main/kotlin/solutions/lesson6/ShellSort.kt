@@ -17,13 +17,11 @@ class ShellSort : Task {
             while (i + gap < array.size) {
                 var j = i + gap
                 val current = array[j]
-//  этот цикл выполнится 0 или 1 раз, поэтому в строчке array[j] = current выполнится либо обмен,
-//  либо переприсовится собственное значение
                 while (j - gap >= 0 && array[j - gap] > current) {
                     array[j] = array[j - gap]
                     j = j - gap
+                    array[j] = current
                 }
-                array[j] = current
                 i++
             }
             gap = gap / 2
