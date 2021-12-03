@@ -11,9 +11,9 @@ class AdaptiveBubbleSort : Task {
         return array.joinToString(separator = " ")
     }
 
-    fun sort(array: IntArray) {
-        var swapped = false
+    private fun sort(array: IntArray) {
         for (barrier in 0 until array.size - 1) {
+            var swapped = false
             for (index in 0 until array.size - barrier - 1) {
                 if (array[index] > array[index + 1]) { // из-за index + 1 в условии цикла -1, чтобы бы не выйти за границу массива
                     swap(array, index, index + 1)
