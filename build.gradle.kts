@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
@@ -30,4 +31,10 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+tasks.withType<Test> {
+    minHeapSize = "2g"
+    maxHeapSize = "20g"
+    jvmArgs = listOf("-Xss2g")
 }
