@@ -3,6 +3,8 @@ package solutions.lesson10
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.io.FileOutputStream
+import java.io.PrintStream
 import java.util.*
 import kotlin.math.log2
 
@@ -10,6 +12,18 @@ internal class BinarySearchTreeTest {
     @Test
     fun size() {
         val tree = createBst()
+        assertEquals(7, tree.size())
+
+        tree.print(PrintStream(FileOutputStream("tree.txt"), true, "utf-8"))
+        tree.print(PrintStream(System.out, true, "utf-8"))
+    }
+
+    @Test
+    fun insert() {
+        val tree = createBst()
+        assertEquals(7, tree.size())
+
+        tree.insert(20)
         assertEquals(7, tree.size())
     }
 
@@ -64,13 +78,18 @@ internal class BinarySearchTreeTest {
 
         assertTrue(randoms.size >= treeSize)
 
+        val start00 = System.currentTimeMillis()
         randoms.forEach { tree1.insert(it) }
         assertEquals(treeSize.toInt(), tree1.size())
+        println(System.currentTimeMillis() - start00)
 
         val tree2 = BinarySearchTree()
+        val start01 = System.currentTimeMillis()
         for (i in 0 until treeSize.toInt()) {
             tree2.insert(i)
         }
+        println(System.currentTimeMillis() - start01)
+
         assertEquals(treeSize.toInt(), tree2.size())
 
         val ints: IntArray = random.ints(treeSize / 10, 0, treeSize.toInt()).toArray()

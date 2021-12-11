@@ -1,7 +1,8 @@
 package solutions.lesson10
 
-class BinarySearchTree {
-    private var root: Node? = null
+
+open class BinarySearchTree {
+    var root: Node? = null
 
     class Node(
         var key: Int // Comparable ?
