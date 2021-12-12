@@ -2,7 +2,7 @@ package solutions.lesson10
 
 class AvlTree {
     class Node internal constructor(var key: Int) {
-        var height = 0
+        var height = 1
         var left: Node? = null
         var right: Node? = null
     }
@@ -33,7 +33,7 @@ class AvlTree {
     }
 
     fun height(): Int {
-        return if (root == null) -1 else root!!.height
+        return if (root == null) 0 else root!!.height
     }
 
     private fun insert(node: Node?, key: Int): Node {
@@ -133,7 +133,7 @@ class AvlTree {
     }
 
     private fun height(n: Node?): Int {
-        return n?.height ?: -1
+        return n?.height ?: 0
     }
 
     fun getBalance(n: Node?): Int {

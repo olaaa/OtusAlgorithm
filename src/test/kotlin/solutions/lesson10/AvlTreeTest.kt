@@ -54,14 +54,14 @@ class AvlTreeTest {
     @Test
     fun givenEmptyTree_whenHeightCalled_shouldReturnMinus1() {
         val tree = AvlTree()
-        assertEquals(-1, tree.height())
+        assertEquals(0, tree.height())
     }
 
     @Test
     fun givenEmptyTree_whenInsertCalled_heightShouldBeZero() {
         val tree = AvlTree()
         tree.insert(1)
-        assertEquals(0, tree.height())
+        assertEquals(1, tree.height())
     }
 
     @Test
