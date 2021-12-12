@@ -86,45 +86,46 @@ class AvlTree {
     }
 
     private fun rebalance(z: Node): Node {
-        var z: Node = z
-        updateHeight(z)
-        val balance = getBalance(z)
+        var node: Node = z
+        updateHeight(node)
+        val balance = getBalance(node)
         if (balance > 1) {
-            if (height(z.right!!.right) > height(z.right!!.left)) {
-                z = rotateLeft(z)
+            if (height(node.right!!.right) > height(node.right!!.left)) {
+                node = rotateLeft(node)
             } else {
-                z.right = rotateRight(z.right)
-                z = rotateLeft(z)
+                node.right = rotateRight(node.right)
+                node = rotateLeft(node)
             }
         } else if (balance < -1) {
-            if (height(z.left!!.left) > height(z.left!!.right)) {
-                z = rotateRight(z)
+            if (height(node.left!!.left) > height(node.left!!.right)) {
+                node = rotateRight(node)
             } else {
-                z.left = rotateLeft(z.left)
-                z = rotateRight(z)
+//                большой поворот направо
+                node.left = rotateLeft(node.left)
+                node = rotateRight(node)
             }
         }
-        return z
+        return node
     }
 
-    private fun rotateRight(y: Node?): Node {
-        val x = y!!.left
-        val z = x!!.right
-        x.right = y
-        y.left = z
-        updateHeight(y)
-        updateHeight(x)
-        return x
+    private fun rotateRight(node: Node?): Node {
+        val left = node!!.left
+        val leftRight = left!!.right
+        left.right = node
+        node.left = leftRight
+        updateHeight(node)
+        updateHeight(left)
+        return left
     }
 
-    private fun rotateLeft(y: Node?): Node {
-        val x = y!!.right
-        val z = x!!.left
-        x.left = y
-        y.right = z
-        updateHeight(y)
-        updateHeight(x)
-        return x
+    private fun rotateLeft(node: Node?): Node {
+        val right = node!!.right
+        val rightLeft = right!!.left
+        right.left = node
+        node.right = rightLeft
+        updateHeight(node)
+        updateHeight(right)
+        return right
     }
 
     private fun updateHeight(n: Node?) {

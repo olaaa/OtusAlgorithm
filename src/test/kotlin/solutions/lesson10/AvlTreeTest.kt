@@ -1,7 +1,6 @@
 package solutions.lesson10
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.util.*
 import kotlin.math.log2
@@ -52,4 +51,77 @@ class AvlTreeTest {
         treeSize.div(log2(treeSize.toDouble())).also { println(it) }
     }
 
+    @Test
+    fun givenEmptyTree_whenHeightCalled_shouldReturnMinus1() {
+        val tree = AvlTree()
+        assertEquals(-1, tree.height())
+    }
+
+    @Test
+    fun givenEmptyTree_whenInsertCalled_heightShouldBeZero() {
+        val tree = AvlTree()
+        tree.insert(1)
+        assertEquals(0, tree.height())
+    }
+
+    @Test
+    fun givenEmptyTree_whenInsertCalled_treeShouldBeAvl() {
+        val tree = AvlTree()
+        tree.insert(1)
+        assertTrue(isAVL(tree))
+    }
+
+    @Test
+    fun givenSampleTree_whenInsertCalled_treeShouldBeAvl() {
+        val tree: AvlTree = getSampleAvlTree()
+        val newKey = 11
+        tree.insert(newKey)
+        assertTrue(isAVL(tree))
+    }
+
+    @Test
+    fun givenSampleTree_whenFindExistingKeyCalled_shouldReturnMatchedNode() {
+        val tree: AvlTree = getSampleAvlTree()
+        val existingKey = 2
+        val result = tree.find(existingKey)
+        assertEquals(result!!.key, existingKey)
+    }
+
+    @Test
+    fun givenSampleTree_whenFindNotExistingKeyCalled_shouldReturnNull() {
+        val tree: AvlTree = getSampleAvlTree()
+        val notExistingKey = 11
+        val result = tree.find(notExistingKey)
+        assertNull(result)
+    }
+
+    @Test
+    fun givenEmptyTree_whenDeleteCalled_treeShouldBeAvl() {
+        val tree = AvlTree()
+        tree.delete(1)
+        assertTrue(isAVL(tree))
+    }
+
+    @Test
+    fun givenSampleTree_whenDeleteCalled_treeShouldBeAvl() {
+        val tree: AvlTree = getSampleAvlTree()
+        tree.delete(1)
+        assertTrue(isAVL(tree, tree.getRoot()))
+    }
+
+    private fun isAVL(tree: AvlTree): Boolean {
+        return isAVL(tree, tree.getRoot())
+    }
+
+    private fun isAVL(tree: AvlTree, node: AvlTree.Node?): Boolean {
+        if (node == null) return true
+        val balance: Int = tree.getBalance(node)
+        return balance <= 1 && balance >= -1 && isAVL(tree, node.left) && isAVL(tree, node.right)
+    }
+
+    private fun getSampleAvlTree(): AvlTree {
+        val avlTree = AvlTree()
+        for (i in 0..9) avlTree.insert(i)
+        return avlTree
+    }
 }
