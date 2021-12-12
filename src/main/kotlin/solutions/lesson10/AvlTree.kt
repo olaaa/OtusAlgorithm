@@ -110,9 +110,8 @@ class AvlTree {
 
     private fun rotateRight(node: Node?): Node {
         val left = node!!.left
-        val leftRight = left!!.right
+        node.left = left!!.right
         left.right = node
-        node.left = leftRight
         updateHeight(node)
         updateHeight(left)
         return left
@@ -120,9 +119,8 @@ class AvlTree {
 
     private fun rotateLeft(node: Node?): Node {
         val right = node!!.right
-        val rightLeft = right!!.left
+        node.right = right!!.left
         right.left = node
-        node.right = rightLeft
         updateHeight(node)
         updateHeight(right)
         return right
