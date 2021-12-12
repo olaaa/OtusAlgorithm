@@ -32,11 +32,11 @@ class AvlTreeTest {
         val ints: IntArray = random.ints((treeSize / 10).toLong(), 0, treeSize).toArray()
 //    Искать N/10 случайных чисел в каждом дереве.
         val start1 = System.currentTimeMillis()
-        ints.forEach { tree1.find(it) }
+        ints.forEach { tree1.search(it) }
         println(System.currentTimeMillis() - start1)
 
         val start2 = System.currentTimeMillis()
-        ints.forEach { tree2.find(it) }
+        ints.forEach { tree2.search(it) }
         println(System.currentTimeMillis() - start2)
 
         //    Удалить N/10 случайных элементов в каждом дереве.
@@ -83,16 +83,16 @@ class AvlTreeTest {
     fun givenSampleTree_whenFindExistingKeyCalled_shouldReturnMatchedNode() {
         val tree: AvlTree = getSampleAvlTree()
         val existingKey = 2
-        val result = tree.find(existingKey)
-        assertEquals(result!!.key, existingKey)
+        val result = tree.search(existingKey)
+        assertTrue(result)
     }
 
     @Test
     fun givenSampleTree_whenFindNotExistingKeyCalled_shouldReturnNull() {
         val tree: AvlTree = getSampleAvlTree()
         val notExistingKey = 11
-        val result = tree.find(notExistingKey)
-        assertNull(result)
+        val result = tree.search(notExistingKey)
+        assertFalse(result)
     }
 
     @Test

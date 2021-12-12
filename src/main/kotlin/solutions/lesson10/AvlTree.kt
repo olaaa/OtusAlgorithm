@@ -9,15 +9,23 @@ class AvlTree {
 
     private var root: Node? = null
 
-    fun find(key: Int): Node? {
-        var current = root
-        while (current != null) {
-            if (current.key == key) {
-                break
-            }
-            current = if (current.key < key) current.right else current.left
+    fun search(x: Int): Boolean =
+        searchRecursively(x, root)
+
+    private fun searchRecursively(x: Int, node: Node?): Boolean {
+        if (node == null) {
+            return false
         }
-        return current
+
+        return if (x == node.key) {
+            true
+        } else if (x < node.key) {
+            searchRecursively(x, node.left)
+        } else if (x > node.key) {
+            searchRecursively(x, node.right)
+        } else {
+            throw IllegalStateException()
+        }
     }
 
     fun insert(key: Int) {
@@ -25,7 +33,7 @@ class AvlTree {
     }
 
     fun delete(key: Int) {
-        root = delete(root, key)
+        root = deleteRecursively(root, key)
     }
 
     fun getRoot(): Node? {
@@ -43,31 +51,31 @@ class AvlTree {
             node.left = insert(node.left, key)
         } else if (node.key < key) {
             node.right = insert(node.right, key)
-        } else {
-            throw RuntimeException("duplicate Key!")
         }
+
         return rebalance(node)
     }
 
-    private fun delete(node: Node?, key: Int): Node? {
+    private fun deleteRecursively(node: Node?, key: Int): Node? {
         var node = node
         if (node == null) {
             return node
         } else if (node.key > key) {
-            node.left = delete(node.left, key)
+            node.left = deleteRecursively(node.left, key)
         } else if (node.key < key) {
-            node.right = delete(node.right, key)
+            node.right = deleteRecursively(node.right, key)
         } else {
             if (node.left == null || node.right == null) {
-                node = if (node.left == null) {
-                    node.right
-                } else {
-                    node.left
-                }
-            } else {
-                val mostLeftChild = mostLeftChild(node.right)
+                node =
+                    if (node.left == null) {
+                        node.right
+                    } else {
+                        node.left
+                    }
+            } else { // оба потомка непустые
+                val mostLeftChild = mostLeftChild(node.right!!)
                 node.key = mostLeftChild.key
-                node.right = delete(node.right, node.key)
+                node.right = deleteRecursively(node.right, node.key)
             }
         }
         if (node != null) {
@@ -76,13 +84,12 @@ class AvlTree {
         return node
     }
 
-    private fun mostLeftChild(node: Node?): Node {
-        var current = node
-        /* loop down to find the leftmost leaf */
-        while (current!!.left != null) {
-            current = current.left
+    private fun mostLeftChild(node: Node): Node {
+        if (node.left == null) {
+            return node
         }
-        return current
+
+        return mostLeftChild(node.left!!)
     }
 
     private fun rebalance(z: Node): Node {
