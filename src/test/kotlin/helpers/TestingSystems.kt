@@ -32,13 +32,12 @@ class TestingSystems(
     }
 
     private fun runTest(inFile: File, outFile: File): Boolean {
-        val lineSeparator = inFile.readLines()
+        val lineSeparator: List<String> = inFile.readLines()
         val actual = task.run(lineSeparator)
         val except = outFile.readText().trim()
         if (except.contains('.') && except.toDoubleOrNull() is Double && actual.toDoubleOrNull() is Double) {
             return Math.abs(except.toDouble() - actual.toDouble()) < 0.0001
         }
-
         return except == actual
     }
 }
