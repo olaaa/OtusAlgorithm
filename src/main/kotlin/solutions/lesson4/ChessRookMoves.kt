@@ -1,6 +1,7 @@
 package solutions.lesson4
 
 import api.Task
+import kotlin.math.absoluteValue
 
 class ChessRookMoves : Task {
     /**
@@ -11,32 +12,22 @@ class ChessRookMoves : Task {
         if (position < 0 || position > 63) {
             throw IllegalArgumentException()
         }
-//        Конвертировать номер клетки [0; 63] коня в ulong-значение битовой доски
+
+//      Конвертировать номер клетки [0; 63] коня в ulong-значение битовой доски
         val bitPosition: ULong = 1uL shl position
-        bitPosition.toString(2).apply { println(this) }
 
-//        ходы вперед
-        var movesForwardMask: ULong = 0uL
-        var previousPosition: ULong = bitPosition
-        while (previousPosition != 0uL) {
-            previousPosition = previousPosition shl 8
-            movesForwardMask = previousPosition or movesForwardMask
-        }
-
-//        ходы назад
-        var movesBackMask: ULong = 0uL
-        var previousPosition1: ULong = bitPosition
-        while (previousPosition1 != 0uL) {
-            previousPosition1 = previousPosition1 shr 8
-            movesBackMask = previousPosition1 or movesBackMask
-        }
-
-//        ходы вправо и влево
+//        ходы по горизонтали
 //        находим октет
         val octet: Int = position / 8
 //        сгенерировать число, старший октет которого равен 255, все младшие биты -- нули, и вычесть текущую позицию
         val horizontalMoves: ULong = (0b1111_1111uL shl (octet * 8)) xor bitPosition
-        val mask = movesBackMask or movesForwardMask or horizontalMoves
+
+//        ходы по вертикали
+//        берем большее значение октета и вычитаем позицию, так находим положение единички в октете
+        val bitOctetPosition = (octet * 8 - position).absoluteValue
+        val verticalMaskOfA = 0x101010101010101uL
+        val verticalMoves: ULong = (verticalMaskOfA shl bitOctetPosition) xor bitPosition
+        val mask = horizontalMoves or verticalMoves
         return ResetingToZeroBitCounter().populationCounter(mask) to mask
     }
 
@@ -48,5 +39,5 @@ class ChessRookMoves : Task {
 }
 
 fun main() {
-    ChessRookMoves().getBitboardMoves(23).also { println(it) }
+    ChessRookMoves().getBitboardMoves(3).also { println(it) }
 }
