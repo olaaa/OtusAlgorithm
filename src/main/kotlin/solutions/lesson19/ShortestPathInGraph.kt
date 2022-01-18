@@ -2,7 +2,7 @@ package solutions.lesson19
 
 import org.junit.jupiter.api.Assertions
 
-//  http://graphonline.ru/en/?graph=TqRLyrHJkewANKka
+//  http://graphonline.ru/en/?graph=TqRLyrHJkewANKka view graph
 class ShortestPathInGraph {
     private val adjacencyVectors: Array<IntArray> = arrayOf(IntArray(2).apply {
         this[0] = 1
@@ -43,6 +43,8 @@ class ShortestPathInGraph {
 
     )
 
+    private val markedVertexValue: Int = -1
+
     fun dijkstra(): Array<Edge?> {
         val paths = Array<Edge?>(adjacencyVectors.size) { null }
         val maxDistance: Int = Int.MAX_VALUE / 2
@@ -50,13 +52,13 @@ class ShortestPathInGraph {
         marks[0] = 0
         paths[0] = Edge(0, 0, 0)
 
-        for (i in 0 .. adjacencyVectors.size - 2) {
+        for (i in 0..adjacencyVectors.size - 2) {
             val prevVertex: Int = marks.getMin()
             println("current vertex $prevVertex")
 
             for (targetVertexIndex in adjacencyVectors[prevVertex].indices) {
                 val targetVertex = adjacencyVectors[prevVertex][targetVertexIndex]
-                if (marks[targetVertex] == -1) {
+                if (marks[targetVertex] == markedVertexValue) {
                     continue
                 }
 
@@ -68,8 +70,9 @@ class ShortestPathInGraph {
                 }
             }
 
-            // в котлиновском массиве примитивов нет опепации удаления, поэтому присваиваю значение, которое запрещено для графа
-            marks[prevVertex] = -1
+            // в котлиновском массиве примитивов нет опепации удаления, поэтому присваиваю значение,
+            // которое запрещено для весов графа
+            marks[prevVertex] = markedVertexValue
         }
 
         return paths
@@ -78,9 +81,9 @@ class ShortestPathInGraph {
 
     private fun IntArray.getMin(): Int {
         var min: Int = Int.MAX_VALUE
-        var minIndex: Int = -1
+        var minIndex: Int = markedVertexValue
         for (i in 0 until this.size) {
-            if ((this[i] < min) && (this[i] != -1)) {
+            if ((this[i] < min) && (this[i] != markedVertexValue)) {
                 min = this[i]
                 minIndex = i
             }
