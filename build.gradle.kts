@@ -29,12 +29,8 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-application {
-    mainClass.set("MainKt")
-}
-
 tasks.withType<Test> {
     minHeapSize = "2g"
-    maxHeapSize = "20g"
+    maxHeapSize = "10g"
     jvmArgs = listOf("-Xss2g")
 }
