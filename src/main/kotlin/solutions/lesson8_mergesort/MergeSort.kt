@@ -53,8 +53,7 @@ class MergeSort: Task {
                 j++
             }
 
-            k += 1
-            assert(k < tmpArray.size)
+            k++
         }
 
         for (i in 0 until tmpArray.size) {
