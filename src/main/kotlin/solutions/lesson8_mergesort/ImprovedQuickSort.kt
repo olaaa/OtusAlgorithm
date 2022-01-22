@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions
 import util.convertInputToArray
 import util.swap
 
-class QuickSort : Task {
+class ImprovedQuickSort : Task {
     private var comparisonCounter: Long = 0
 
     override fun run(data: List<String>): String {
@@ -30,56 +30,45 @@ class QuickSort : Task {
      */
     private fun sort(array: IntArray, l: Int, r: Int) {
         check(l >= 0)
-        check(r >= 0)
 
-        check(l <= r)
+        if (r == -1 && l == 0) {
+            return
+        }
+
+        if (r + 1 == l) {
+            return
+        }
+
         if (l == r) {
             return
         }
 
-        val m = split(array, l, r)
+        val a = split(array, l, r)
 
-        sort(array, l, m)
-        check(r >= m + 1)
-        sort(array, m + 1, r)
+        sort(array, l, a - 1)
+        sort(array, a + 1, r)
     }
 
-    private fun split(array: IntArray, l: Int, r: Int, pivotIndex: Int = r): Int {
+    private fun split(array: IntArray, l: Int, r: Int): Int {
         check(l < r)
         check(l >= 0)
         check(r >= 0)
 
-        val pivot = array[pivotIndex]
-        var i = l
-        var j = r
+        val pivot = array[r]
+        var a = l - 1 // последний элемент в первой (левой) части
 
-        while (i <= j) {
-            while (i <= j && array[i] <= pivot) {
-                comparisonCounter++
-                i++
-            }
-
-            while (i <= j && array[j] > pivot) {
-                comparisonCounter++
-                j--
-            }
-
-            while (i <= j && array[i] > pivot && array[j] <= pivot) {
-                comparisonCounter++
-                swap(array, i, j)
-                i++
-                j--
+//        так как опорный элемент -- это последний элемент в массиве, он окажется старшим в первой части, поэтому
+//        необходимо сортировать до и после него. Его местоположение не изменится
+        for (i in l..r) {
+            if (array[i] <= pivot) {
+                ++a
+                if (a != i) {
+                    swap(array, a, i)
+                }
             }
         }
 
-        val m = j
-//        случай, когда опорный элемент был в конце массива и оказался с самым большим значением в массиве, и поэтому разделитель остался на том же месте.
-        if (m == r) {
-            return r - 1
-        }
-
-        check(m < r)
-        return m
+        return a
     }
 }
 
@@ -91,7 +80,7 @@ fun main() {
         this[3] = 7
     }
 
-    val result = QuickSort()
+    val result = ImprovedQuickSort()
 
     result.sort(array)
     Assertions.assertArrayEquals(
