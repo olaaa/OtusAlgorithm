@@ -4,34 +4,31 @@ import helpers.TestingSystems
 import helpers.runWithTimeout
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
-import solutions.lesson6.AdaptiveBubbleSort
-
 internal class MergeSortTest {
 
-    private val adaptiveBubbleSort = MergeSort()
+    private val sort = MergeSort()
 
     @Test
     fun runRandom() {
-        val testingSystems = TestingSystems("6/0.random", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/0.random", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runDigits() {
-        val testingSystems = TestingSystems("6/1.digits", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/1.digits", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runSorted() {
-        val testingSystems = TestingSystems("6/2.sorted", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/2.sorted", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runRevers() {
-        val testingSystems = TestingSystems("6/3.revers", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/3.revers", sort)
         runWithTimeout(testingSystems)
     }
 }

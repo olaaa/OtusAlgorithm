@@ -34,10 +34,7 @@ class QuickSort : Task {
         }
 
         val m = split(array, l, r)
-        //    когда массив отсортирован
-//    if (m >= array.size - 1) {
-//        return
-//    }
+
         sort(array, l, m)
         check(r >= m + 1)
         sort(array, m + 1, r)
@@ -57,7 +54,6 @@ class QuickSort : Task {
         var j = r
 
         while (i <= j) {
-//            while (i <= r && array[i] <= pivot) {
             while (i <= j && array[i] <= pivot) {
                 i++
             }
@@ -73,24 +69,12 @@ class QuickSort : Task {
             }
         }
 
-//        val newPivotIndex = array.indexOf(pivot)
-//        for (ii in l .. r) {
-//            if (ii < newPivotIndex) {
-//                check(array[ii] < pivot)
-//            } else if ( ii == newPivotIndex) {
-//                check(array[ii] == pivot)
-//            } else if (ii > newPivotIndex) {
-//                check(array[ii] > pivot)
-//            }
-//        }
-//        val m = l + i
         val m = j
 //        случай, когда опорный элемент был в конце массива и оказался с самым большим значением в массиве, и поэтому разделитель остался на том же месте.
         if (m == r) {
-// нужно изменить пивот
             return r - 1
-//            return split(array, l, r, pivotIndex - 1)
         }
+
         check(m < r)
         return m
     }

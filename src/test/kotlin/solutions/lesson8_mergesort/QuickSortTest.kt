@@ -6,29 +6,29 @@ import org.junit.jupiter.api.Test
 
 internal class QuickSortTest {
 
-    private val adaptiveBubbleSort = QuickSort()
+    private val sort = QuickSort()
 
     @Test
     fun runRandom() {
-        val testingSystems = TestingSystems("6/0.random", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/0.random", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runDigits() {
-        val testingSystems = TestingSystems("6/1.digits", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/1.digits", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runSorted() {
-        val testingSystems = TestingSystems("6/2.sorted", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/2.sorted", sort)
         runWithTimeout(testingSystems)
     }
 
     @Test
     fun runRevers() {
-        val testingSystems = TestingSystems("6/3.revers", adaptiveBubbleSort)
+        val testingSystems = TestingSystems("6/3.revers", sort)
         runWithTimeout(testingSystems)
     }
 }
