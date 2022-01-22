@@ -6,6 +6,8 @@ import util.convertInputToArray
 import util.swap
 
 class QuickSort : Task {
+    private var comparisonCounter: Long = 0
+
     override fun run(data: List<String>): String {
         val array = convertInputToArray(data)
         sort(array)
@@ -16,8 +18,10 @@ class QuickSort : Task {
         if (array.size == 0) {
             return
         }
+        comparisonCounter = 0
 
         sort(array, 0, array.size - 1)
+        println("Comparison count $comparisonCounter")
     }
 
     /*
@@ -55,14 +59,17 @@ class QuickSort : Task {
 
         while (i <= j) {
             while (i <= j && array[i] <= pivot) {
+                comparisonCounter++
                 i++
             }
 
-            while (i <= j && array[j] > pivot && i <= j) {
+            while (i <= j && array[j] > pivot) {
+                comparisonCounter++
                 j--
             }
 
             while (i <= j && array[i] > pivot && array[j] <= pivot) {
+                comparisonCounter++
                 swap(array, i, j)
                 i++
                 j--
