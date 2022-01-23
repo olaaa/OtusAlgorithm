@@ -6,8 +6,6 @@ import util.convertInputToArray
 import util.swap
 
 class ImprovedQuickSort : Task {
-    private var comparisonCounter: Long = 0
-
     override fun run(data: List<String>): String {
         val array = convertInputToArray(data)
         sort(array)
@@ -18,10 +16,8 @@ class ImprovedQuickSort : Task {
         if (array.size == 0) {
             return
         }
-        comparisonCounter = 0
 
         sort(array, 0, array.size - 1)
-        println("Comparison count $comparisonCounter")
     }
 
     /*

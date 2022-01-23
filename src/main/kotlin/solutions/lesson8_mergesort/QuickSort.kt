@@ -53,6 +53,8 @@ class QuickSort : Task {
         var i = l
         var j = r
 
+// Вложенные циклы while оставлены намеренно. В варианте с одним циклом и if-else-ветками в теле цикла сортировка работает
+// медленнее до пяти раз в зависимости от типа данных.
         while (i <= j) {
             while (i <= j && array[i] <= pivot) {
                 comparisonCounter++
