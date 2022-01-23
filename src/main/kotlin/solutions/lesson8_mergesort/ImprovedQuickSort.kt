@@ -6,6 +6,8 @@ import util.convertInputToArray
 import util.swap
 
 class ImprovedQuickSort : Task {
+    private var comparisonCounter: Long = 0
+
     override fun run(data: List<String>): String {
         val array = convertInputToArray(data)
         sort(array)
@@ -16,8 +18,10 @@ class ImprovedQuickSort : Task {
         if (array.size == 0) {
             return
         }
+        comparisonCounter = 0
 
         sort(array, 0, array.size - 1)
+        println("Comparison count $comparisonCounter")
     }
 
     /*
@@ -56,6 +60,7 @@ class ImprovedQuickSort : Task {
 //        так как опорный элемент -- это последний элемент в массиве, он окажется старшим в первой части, поэтому
 //        необходимо сортировать до и после него. Его местоположение не изменится
         for (i in l..r) {
+            comparisonCounter++
             if (array[i] <= pivot) {
                 ++a
                 if (a != i) {
