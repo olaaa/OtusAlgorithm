@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions
 
 class OptimizedByShiftsTable {
     /**
-     * Проверка с конца шаблона. Если символ в шаблоне отсутствует, то сдвиг на длину шаблона
+     * Проверка с конца шаблона. ТАК КАК последний символ будет сравниваться size - 1 раз, а первый только один
+     * Если символ в шаблоне отсутствует, то сдвиг на длину шаблона, иначе -- на один шаг
+     * В лучшем случае сложность t / p
      */
     fun indexOf(text: CharArray, pattern: CharArray): Int {
         val shifts: IntArray = creteShifts(pattern)
@@ -21,7 +23,8 @@ class OptimizedByShiftsTable {
                 return t
             }
 
-            t = t + shifts[text[t + p].code]
+//            решение о сдвиге принимается по последнему символу в шаблоне
+            t = t + shifts[text[t + pattern.size - 1].code]
         }
 
         return -1
@@ -40,6 +43,6 @@ class OptimizedByShiftsTable {
 }
 
 fun main() {
-    val result = OptimizedByShiftsTable().indexOf("stronxstring".toCharArray(), "string".toCharArray())
-    Assertions.assertEquals(6, result)
+    val result = OptimizedByShiftsTable().indexOf("stronxstrxngstring".toCharArray(), "string".toCharArray())
+    Assertions.assertEquals(12, result)
 }
