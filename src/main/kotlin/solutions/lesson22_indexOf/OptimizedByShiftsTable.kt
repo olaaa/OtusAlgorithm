@@ -7,7 +7,7 @@ class OptimizedByShiftsTable {
      * Проверка с конца шаблона. Если символ в шаблоне отсутствует, то сдвиг на длину шаблона
      */
     fun indexOf(text: CharArray, pattern: CharArray): Int {
-        val shifts = creteShifts(pattern)
+        val shifts: IntArray = creteShifts(pattern)
 
         var t = 0
 
@@ -16,11 +16,12 @@ class OptimizedByShiftsTable {
             while (p >= 0 && pattern[p] == text[t + p]) {
                 p--
             }
-            if (p == 0) {
+
+            if (p == -1) {
                 return t
             }
 
-            t = t +
+            t = t + shifts[text[t + p].code]
         }
 
         return -1
