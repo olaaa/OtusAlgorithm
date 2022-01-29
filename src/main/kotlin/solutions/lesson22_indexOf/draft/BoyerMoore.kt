@@ -1,8 +1,8 @@
-package solutions.lesson22_indexOf
+package solutions.lesson22_indexOf.draft
 
 class BoyerMoore {
 }
-
+// НЕ РАБОТАЕТ
 /**
  * Returns the index within this string of the first occurrence of the
  * specified substring. If it is not a substring, return -1.
@@ -40,12 +40,12 @@ fun indexOf(haystack: CharArray, needle: CharArray): Int {
  * Makes the jump table based on the mismatched character information.
  */
 private fun makeCharTable(needle: CharArray): IntArray {
-    val ALPHABET_SIZE = Character.MAX_VALUE.code + 1 // 65536
+    val ALPHABET_SIZE = 128 // 65536
     val table = IntArray(ALPHABET_SIZE)
     for (i in table.indices) {
         table[i] = needle.size
     }
-    for (i in needle.indices) {
+    for (i in needle.indices - 1) {
         table[needle[i].code] = needle.size - 1 - i
     }
     return table
@@ -58,11 +58,11 @@ private fun makeCharTable(needle: CharArray): IntArray {
 private fun makeOffsetTable(needle: CharArray): IntArray {
     val table = IntArray(needle.size)
     var lastPrefixPosition = needle.size
-    for (i in needle.size downTo 1) {
-        if (isPrefix(needle, i)) {
-            lastPrefixPosition = i
+    for (i in needle.size - 1 downTo 0) {
+        if (isPrefix(needle, i + 1)) {
+            lastPrefixPosition = i + 1
         }
-        table[needle.size - i] = lastPrefixPosition - i + needle.size
+        table[needle.size - 1 - i] = lastPrefixPosition - i + needle.size - 1
     }
     for (i in 0 until needle.size - 1) {
         val slen = suffixLength(needle, i)
@@ -72,7 +72,8 @@ private fun makeOffsetTable(needle: CharArray): IntArray {
 }
 
 /**
- * Is needle[p:end] a prefix of needle?
+ * Функция, проверяющая, что подстрока x[p…m−1] является префиксом шаблона x.
+ * Требует O(m−p) времени.
  */
 private fun isPrefix(needle: CharArray, p: Int): Boolean {
     var i = p
@@ -104,5 +105,7 @@ private fun suffixLength(needle: CharArray, p: Int): Int {
 }
 
 fun main() {
-    indexOf("adcdcf".toCharArray(), "cf".toCharArray()).apply { println(this) }
+    indexOf("GCATCGCAGAGAGTATACAGTACG".toCharArray(),
+        "GCAGAGAG".toCharArray()).apply { println(this) }
+//        "BC.ABC.BC.C.ABC".toCharArray()).apply { println(this) }
 }

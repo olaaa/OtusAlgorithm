@@ -2,7 +2,7 @@ package solutions.lesson22_indexOf
 
 import org.junit.jupiter.api.Assertions
 
-class OptimizedByShiftsTable {
+class BoyerMooreHorspool {
     /**
      * Проверка с конца шаблона. ТАК КАК последний символ будет сравниваться size - 1 раз, а первый только один
      * Если символ в шаблоне отсутствует, то сдвиг на длину шаблона, иначе -- на один шаг
@@ -33,9 +33,10 @@ class OptimizedByShiftsTable {
     private fun creteShifts(pattern: CharArray): IntArray {
 //        по умолчанию размер шаблона
         val shifts = IntArray(128) { pattern.size }
-//        для тех символов, которые есть в шаблоне, сдвиг на 1
-        for (i in 0 until pattern.size - 1) {
-            shifts[pattern[i].code] = 1
+//        последний символ не участвует в цикле
+        for (i in 0 until pattern.size - 1 ) {
+//  если в шаблоне символ повторяется, то в итоге запишется наименьшее значение, так как массив в обратную сторону
+            shifts[pattern[i].code] = pattern.size - 1 - i
         }
 
         return shifts
@@ -43,6 +44,8 @@ class OptimizedByShiftsTable {
 }
 
 fun main() {
-    val result = BoyerMooreHorspool().indexOf("stronxstrxngstring".toCharArray(), "string".toCharArray())
-    Assertions.assertEquals(12, result)
+    val haystack = ".KOLOLOKOLOKOLOKOL"
+    val needle = "KOLOKOL"
+    val result = BoyerMooreHorspool().indexOf(haystack.toCharArray(), needle.toCharArray())
+    Assertions.assertEquals(haystack.indexOf(needle), result)
 }
