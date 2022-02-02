@@ -3,7 +3,7 @@ package solutions.lesson22_indexOf
 import org.junit.jupiter.api.Assertions
 
 /**
-Complexitity t * p -- quadratic
+Complexity t * p -- quadratic
  */
 class FullScan {
     fun indexOf(text: CharArray, pattern: CharArray): Int {

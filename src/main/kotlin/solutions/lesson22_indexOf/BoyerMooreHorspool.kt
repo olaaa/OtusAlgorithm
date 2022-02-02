@@ -32,7 +32,7 @@ class BoyerMooreHorspool {
 
     private fun creteShifts(pattern: CharArray): IntArray {
 //        по умолчанию размер шаблона
-        val shifts = IntArray(128) { pattern.size }
+        val shifts = IntArray(Char.MAX_VALUE.toInt()) { pattern.size }
 //        последний символ не участвует в цикле
         for (i in 0 until pattern.size - 1 ) {
 //  если в шаблоне символ повторяется, то в итоге запишется наименьшее значение, так как массив в обратную сторону

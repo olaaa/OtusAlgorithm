@@ -32,7 +32,7 @@ class OptimizedByShiftsTable {
 
     private fun creteShifts(pattern: CharArray): IntArray {
 //        по умолчанию размер шаблона
-        val shifts = IntArray(128) { pattern.size }
+        val shifts = IntArray(Char.MAX_VALUE.toInt()) { pattern.size }
 //        для тех символов, которые есть в шаблоне, сдвиг на 1
         for (i in 0 until pattern.size - 1) {
             shifts[pattern[i].code] = 1
@@ -43,6 +43,6 @@ class OptimizedByShiftsTable {
 }
 
 fun main() {
-    val result = BoyerMooreHorspool().indexOf("stronxstrxngstring".toCharArray(), "string".toCharArray())
+    val result = OptimizedByShiftsTable().indexOf("stronxstrxngstring".toCharArray(), "string".toCharArray())
     Assertions.assertEquals(12, result)
 }
