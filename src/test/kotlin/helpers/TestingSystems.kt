@@ -12,11 +12,11 @@ class TestingSystems(
 ) {
     @Test
     fun runTests() {
-        val path = "src/test/resources/"
+        val path = "src${File.separator}test${File.separator}resources${File.separator}"
 
         var currFileNumber = 0
         while (true) {
-            val prefixFile = "$path$pathToLesson\\test.$currFileNumber."
+            val prefixFile = "$path$pathToLesson${File.separator}test.$currFileNumber."
             val inFile = File("${prefixFile}in")
             val outFile = File("${prefixFile}out")
             if (inFile.exists().not() || outFile.exists().not()) {
