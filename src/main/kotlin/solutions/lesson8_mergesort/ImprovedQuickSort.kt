@@ -31,15 +31,11 @@ class ImprovedQuickSort : Task {
     private fun sort(array: IntArray, l: Int, r: Int) {
         check(l >= 0)
 
-        if (r == -1 && l == 0) {
-            return
-        }
-
         if (r + 1 == l) {
             return
         }
 
-        if (l == r) {
+        if (r <= l) {
             return
         }
 
@@ -63,9 +59,7 @@ class ImprovedQuickSort : Task {
             comparisonCounter++
             if (array[i] <= pivot) {
                 ++a
-                if (a != i) {
-                    swap(array, a, i)
-                }
+                swap(array, a, i)
             }
         }
 
