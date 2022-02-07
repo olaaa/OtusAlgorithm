@@ -98,17 +98,18 @@ class BucketSort : Task {
         }
     }
 
-    private fun getMaxValue(array: IntArray): Int {
-        var maxValue = 0
+}
 
-        for (i in 0 until array.size) {
-            if (array[i] > maxValue) {
-                maxValue = array[i]
-            }
+fun getMaxValue(array: IntArray): Int {
+    var maxValue = 0
+
+    for (i in 0 until array.size) {
+        if (array[i] > maxValue) {
+            maxValue = array[i]
         }
-
-        return maxValue
     }
+
+    return maxValue
 }
 
 fun main() {
