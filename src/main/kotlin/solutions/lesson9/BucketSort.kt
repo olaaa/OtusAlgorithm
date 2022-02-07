@@ -2,9 +2,7 @@ package solutions.lesson9
 
 import api.Task
 import org.junit.jupiter.api.Assertions
-import solutions.lesson8_mergesort.MergeSort
 import util.convertInputToArray
-import java.lang.IllegalStateException
 
 /**
  * Только неотрицательные числа
@@ -23,8 +21,9 @@ class BucketSort : Task {
 //            нужно проитерироваться до конца списка
                 var node: Node? = table[index]!!
                 while (node != null) {
+//  когда следующий элемент в списке имеет такое же значение, как и добавляемое, но следующее отличаетяся
+// добавляемый элемент нужно положить в конце среди одинаковых
                     if (node.value == value
-//                    как отработает, если след == null
                         && node.next?.value != value
                     ) {
                         val newNode = Node(value, node.next)
@@ -36,7 +35,9 @@ class BucketSort : Task {
                         val newNode = Node(value, node.next)
                         node.next = newNode
                         break
-                    } else if (node.value > value) {
+                    }
+// добавляемое значение меньшь текущего. такая ситуация возможна, когда добавлять нужно первым элементом списка.
+                    else if (node.value > value && table[index] == node) {
                         val newNode = Node(value, node.next)
                         table[index] = newNode
                         newNode.next = node
@@ -79,8 +80,6 @@ class BucketSort : Task {
             val index = bucketIndex(array[i])
             mymap.put(index, array[i])
         }
-
-        println(mymap)
 
         var j = 0
         // iterator
