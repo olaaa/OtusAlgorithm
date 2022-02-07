@@ -46,14 +46,8 @@ class BucketSort : Task {
                         val newNode = Node(value, node.next)
                         node.next = newNode
                         break
-                    }
-// добавляемое значение больше текущего и больше следующего
-                    else if (node.value < value
-                        && (node.next != null || node.next!!.value < value)
-                    ) {
-                        node = node.next
                     } else {
-                        throw IllegalStateException()
+                        node = node.next
                     }
                 }
             }
@@ -75,8 +69,8 @@ class BucketSort : Task {
 
         val max = getMaxValue(array)
         val bucketIndex = { a: Int ->
-//  сначала делим, чтобы избежать переполнение int
-            val result = (a / (max + 1)) * array.size
+//  сначала делим, чтобы избежать переполнение int. a.toDouble() необходимо, чтобы деление не давало 0
+            val result = ((a.toDouble() / (max + 1)) * array.size).toInt()
             result
         }
 
