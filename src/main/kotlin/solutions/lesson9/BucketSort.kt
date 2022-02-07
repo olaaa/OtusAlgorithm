@@ -20,6 +20,15 @@ class BucketSort : Task {
             } else {
 //            нужно проитерироваться до конца списка
                 var node: Node? = table[index]!!
+
+// добавляемое значение меньше текущего. такая ситуация возможна, когда добавлять нужно первым элементом списка.
+                if (node!!.value > value) {
+                    val newNode = Node(value, node.next)
+                    table[index] = newNode
+                    newNode.next = node
+                    return
+                }
+
                 while (node != null) {
 //  когда следующий элемент в списке имеет такое же значение, как и добавляемое, но следующее отличаетяся
 // добавляемый элемент нужно положить в конце среди одинаковых
@@ -29,22 +38,23 @@ class BucketSort : Task {
                         val newNode = Node(value, node.next)
                         node.next = newNode
                         break
-                    } else if (node.value < value
+                    }
+// добавляемое значение больше текущего, а следующего либо нет, либо оно больше добавляемого
+                    else if (node.value < value
                         && (node.next == null || node.next!!.value > value)
                     ) {
                         val newNode = Node(value, node.next)
                         node.next = newNode
                         break
                     }
-// добавляемое значение меньшь текущего. такая ситуация возможна, когда добавлять нужно первым элементом списка.
-                    else if (node.value > value && table[index] == node) {
-                        val newNode = Node(value, node.next)
-                        table[index] = newNode
-                        newNode.next = node
-                        break
+// добавляемое значение больше текущего и больше следующего
+                    else if (node.value < value
+                        && (node.next != null || node.next!!.value < value)
+                    ) {
+                        node = node.next
+                    } else {
+                        throw IllegalStateException()
                     }
-
-                    node = node.next
                 }
             }
         }
@@ -65,12 +75,9 @@ class BucketSort : Task {
 
         val max = getMaxValue(array)
         val bucketIndex = { a: Int ->
-            val result = a * array.size / (max + 1)
+//  сначала делим, чтобы избежать переполнение int
+            val result = (a / (max + 1)) * array.size
             result
-        }
-
-        if (Int.MAX_VALUE / max < array.size) {
-            throw IllegalStateException("Size of map cannot be greater than Int.MAX_VALUE")
         }
 
         val bucketIndexOfMaxValue = bucketIndex(max)
@@ -83,7 +90,7 @@ class BucketSort : Task {
 
         var j = 0
         // iterator
-        for (i in 0 until  mymap.table.size) {
+        for (i in 0 until mymap.table.size) {
             if (mymap.table[i] == null) {
                 continue
             }
